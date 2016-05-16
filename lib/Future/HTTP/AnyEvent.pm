@@ -1,7 +1,7 @@
 package Future::HTTP::AnyEvent;
 use strict;
 use Future;
-use AnyEvent::HTTP;
+use AnyEvent::HTTP ();
 use AnyEvent::Future 'as_future_cb';
 use Moo 2; # or Moo::Lax if you can't have Moo v2
 use Filter::signatures;
@@ -33,7 +33,7 @@ sub future_from_result {
 
 sub http_request($self,$method,$url,%options) {
     as_future_cb( sub($done_cb, $fail_cb) {
-        http_request($method => $url, %ae_options, $done_cb)
+        AnyEvent::HTTP::http_request($method => $url, %options, $done_cb)
     })->then(sub ($body, $headers) {
         return $self->future_from_result($body, $headers);
     });
@@ -41,7 +41,7 @@ sub http_request($self,$method,$url,%options) {
 
 sub http_get($self,$url,%options) {
     as_future_cb( sub($done_cb, $fail_cb) {
-        http_get($url, %ae_options, $done_cb)
+        AnyEvent::HTTP::http_get($url, %options, $done_cb)
     })->then(sub ($body, $headers) {
         return $self->future_from_result($body, $headers);
     });
@@ -49,7 +49,7 @@ sub http_get($self,$url,%options) {
 
 sub http_head($self,$url,%options) {
     as_future_cb( sub($done_cb, $fail_cb) {
-        http_head($url, %ae_options, $done_cb)
+        AnyEvent::HTTP::http_head($url, %options, $done_cb)
     })->then(sub ($body, $headers) {
         return $self->future_from_result($body, $headers);
     });
@@ -57,8 +57,8 @@ sub http_head($self,$url,%options) {
 
 sub http_post($self,$url,%options) {
     as_future_cb( sub($done_cb,$fail_cb) {
-        my $body = delete $ae_options{ body };
-        http_post($url, $body, %ae_options, $done_cb)
+        my $body = delete $options{ body };
+        AnyEvent::HTTP::http_post($url, $body, %options, $done_cb)
     })->then(sub ($body, $headers) {
         return $self->future_from_result($body, $headers);
     });
