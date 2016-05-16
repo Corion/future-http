@@ -11,13 +11,15 @@ use vars qw($implementation @loops $VERSION);
 $VERSION = '0.01';
 
 @loops = (
-    # POE support would be nice
-    # IO::Async support would be nice
-    # Mojolicious support would be nice
-    # LWP::UserAgent support would be nice
+    # Mojolicious support would be nice, should use Future::Mojo and Mojolicious::UserAgent I guess
     ['AnyEvent.pm'    => 'Future::HTTP::AnyEvent'],
     ['AE.pm'          => 'Future::HTTP::AnyEvent'],
-    ['Future/HTTP.pm' => 'Future::HTTP::Tiny'], # The fallback
+    # POE support would be nice
+    # IO::Async support would be nice
+    # LWP::UserAgent support would be nice
+    
+    # The fallback, will always catch due to loading Future::HTTP
+    ['Future/HTTP.pm' => 'Future::HTTP::Tiny'],
 );
 
 sub new {
