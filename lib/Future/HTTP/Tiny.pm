@@ -111,4 +111,64 @@ sub http_post($self,$url,$body,%options) {
     )
 }
 
+=head2 C<< $ua->http_get($url, %options) >>
+
+    $ua->http_get('http://example.com/',
+        headers => {
+            'Accept' => 'text/json',
+        },
+    )->then(sub {
+        my( $body, $headers ) = @_;
+        ...
+    });
+
+Retrieves the URL and returns the body and headers, like
+the function in L<AnyEvent::HTTP>.
+
+=head2 C<< $ua->http_head($url, %options) >>
+
+    $ua->http_head('http://example.com/',
+        headers => {
+            'Accept' => 'text/json',
+        },
+    )->then(sub {
+        my( $body, $headers ) = @_;
+        ...
+    });
+
+Retrieves the header of the URL and returns the headers,
+like the function in L<AnyEvent::HTTP>.
+
+=head2 C<< $ua->http_post($url, $body, %options) >>
+
+    $ua->http_post('http://example.com/api',
+        '{token:"my_json_token"}',
+        headers => {
+            'Accept' => 'text/json',
+        },
+    )->then(sub {
+        my( $body, $headers ) = @_;
+        ...
+    });
+
+Posts the content to the URL and returns the body and headers,
+like the function in L<AnyEvent::HTTP>.
+
+=head2 C<< $ua->http_request($method, $url, %options) >>
+
+    $ua->http_request('PUT' => 'http://example.com/api',
+        headers => {
+            'Accept' => 'text/json',
+        },
+        body    => '{token:"my_json_token"}',
+    )->then(sub {
+        my( $body, $headers ) = @_;
+        ...
+    });
+
+Posts the content to the URL and returns the body and headers,
+like the function in L<AnyEvent::HTTP>.
+
+=cut
+
 1;
