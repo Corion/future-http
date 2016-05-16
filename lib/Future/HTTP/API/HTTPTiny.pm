@@ -1,4 +1,5 @@
-package Future::HTTP::API::HTTPTiny;
+package # hide from indexer as it's not really ready
+    Future::HTTP::API::HTTPTiny;
 use strict;
 use Filter::signatures;
 no warnings 'experimental';

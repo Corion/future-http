@@ -183,6 +183,40 @@ like the function in L<AnyEvent::HTTP>.
 Posts the content to the URL and returns the body and headers,
 like the function in L<AnyEvent::HTTP>.
 
+=head1 SEE ALSO
+
+L<Future>
+
+L<AnyEvent::HTTP> for the details of the API
+
+=head1 REPOSITORY
+
+The public repository of this module is 
+L<http://github.com/Corion/future-http>.
+
+=head1 SUPPORT
+
+The public support forum of this module is
+L<https://perlmonks.org/>.
+
+=head1 BUG TRACKER
+
+Please report bugs in this module via the RT CPAN bug queue at
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=Future-HTTP>
+or via mail to L<future-http-Bugs@rt.cpan.org>.
+
+=head1 AUTHOR
+
+Max Maischein C<corion@cpan.org>
+
+=head1 COPYRIGHT (c)
+
+Copyright 2016 by Max Maischein C<corion@cpan.org>.
+
+=head1 LICENSE
+
+This module is released under the same terms as Perl itself.
+
 =cut
 
 1;
