@@ -1,4 +1,8 @@
 package Future::HTTP::API::HTTPTiny;
+use strict;
+use Filter::signatures;
+no warnings 'experimental';
+use feature 'signatures';
 require HTTP::Tiny;
 require URI;
 
@@ -101,6 +105,7 @@ sub mirror($self, $url, $file, $args) {
 
 # Replace HTTP::Tiny::Request, keep all the other methods
 
+no warnings 'once';
 *www_form_urlencode = \&HTTP::Tiny::www_form_urlencode;
 *_http_date = \&HTTP::Tiny::_http_date;
 *_parse_http_date = \&HTTP::Tiny::_parse_http_date;
