@@ -11,10 +11,13 @@ my $ok = eval {
     require Future::HTTP::AnyEvent;
     1;
 };
-if( !$ok ) {
-    plan tests => 'SKIP_ALL',
-        "Couldn't load Future::HTTP::AnyEvent: $@";
+my $err = $@;
+if( !$ok) {
+    plan skip_all => "Couldn't load Future::HTTP::AnyEvent: $err";
+    exit;
 };
+
+diag( "Version of AnyEvent::HTTP: " . AnyEvent::HTTP->VERSION );
 
 my $server = Test::HTTP::LocalServer->spawn(
     #debug => 1

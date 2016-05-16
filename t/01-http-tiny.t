@@ -4,12 +4,11 @@ use warnings;
 use Data::Dumper;
 
 use Test::More;
+use lib 'inc';
+use Test::HTTP::LocalServer;
 
 use Future::HTTP::Tiny;
 use HTTP::Tiny;
-
-use lib 'inc';
-use Test::HTTP::LocalServer;
 
 my $server = Test::HTTP::LocalServer->spawn(
     #debug => 1
