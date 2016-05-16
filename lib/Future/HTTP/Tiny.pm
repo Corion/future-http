@@ -24,6 +24,12 @@ has _ua_args => (
 
 Future::HTTP::Tiny - synchronous HTTP client with a Future interface
 
+=head1 DESCRIPTION
+
+This is the default backend. It is chosen if no supported event loop could
+be detected. It will execute the requests synchronously as they are
+made in C<< ->http_request >> .
+
 =cut
 
 sub BUILDARGS {

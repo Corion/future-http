@@ -63,6 +63,12 @@ sub http_post($self,$url,$body, %options) {
     });
 }
 
+=head1 DESCRIPTION
+
+This is the backend chosen if L<AnyEvent.pm> or L<AE.pm> are detected
+in C<%INC>. It will execute the requests asynchronously
+using L<AnyEvent::HTTP>.
+
 =head1 METHODS
 
 =head2 C<< Future::HTTP::AnyEvent->new() >>
