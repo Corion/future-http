@@ -12,7 +12,7 @@ release date is mentioned as well
 
 =cut
 
-my $module = 'Filter::signatures';
+my $module = 'Future::HTTP';
 
 (my $file = $module) =~ s!::!/!g;
 require "$file.pm";
