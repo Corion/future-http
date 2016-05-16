@@ -18,22 +18,27 @@ my $last_version = undef;
 
 sub check {
     return if (! m{(\.pm|\.pl) \z}xmsi);
+    
+    for my $filter ( 0..1 ) {
+        local $ENV{FORCE_FILTER_SIGNATURES} = $_;
 
-    my ($stdout, $stderr, $exit) = capture(sub {
-        system( $^X, '-Mblib', '-wc', $_ );
-    });
+        my ($stdout, $stderr, $exit) = capture(sub {
+            system( $^X, '-Mblib', '-wc', $_ );
+        });
 
-    s!\s*\z!!
-        for ($stdout, $stderr);
+        s!\s*\z!!
+            for ($stdout, $stderr);
 
-    if( $exit ) {
-        diag $exit;
-        fail($_);
-    } elsif( $stderr ne "$_ syntax OK") {
-        diag $stderr;
-        fail($_);
-    } else {
-        pass($_);
+        if( $exit ) {
+            diag "$exit (Filter::signatures: $filter)";
+            fail($_);
+        } elsif( $stderr ne "$_ syntax OK") {
+            diag $stderr;
+            diag "(Filter::signatures: $filter)";
+            fail($_);
+        } else {
+            pass($_);
+        };
     };
 }
 
