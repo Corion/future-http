@@ -1,5 +1,8 @@
 package Future::HTTP;
 use strict;
+use Filter::signatures;
+no warnings 'experimental';
+use feature 'signatures';
 
 =head1 NAME
 
@@ -22,26 +25,28 @@ $VERSION = '0.01';
     ['Future/HTTP.pm' => 'Future::HTTP::Tiny'],
 );
 
-sub new {
-    my( $factoryclass, @args ) = @_;
-    
+sub new($factoryclass, @args) {
     $implementation ||= $factoryclass->best_implementation();
     
     # return a new instance
     $implementation->new(@args);
 }
 
-sub best_implementation {
-    my( $class, @candidates ) = @_;
+sub best_implementation( $class, @candidates ) {
+    
+    if(! @candidates) {
+        @candidates = @loops;
+    };
 
     # Find the currently running/loaded event loop(s)
-    for my $loop (@loops) {
-        if( $INC{$loop->[0]}) {
-            push @candidates, $loop->[1];
-        };
-    };
+    my @applicable_implementations = map {
+        $_->[1]
+    } grep {
+        $INC{$_->[0]}
+    } @candidates;
     
-    for my $impl (@candidates) {
+    # Check which one we can load:
+    for my $impl (@applicable_implementations) {
         if( eval "require $impl; 1" ) {
             return $impl;
         };
@@ -50,6 +55,7 @@ sub best_implementation {
 
 # We support the L<AnyEvent::HTTP> API first
 
-# We should support more APIs than just the one of HTTP::Tiny, later
+# We should support more APIs like HTTP::Tiny, later
+# See L<Future::HTTP::API::HTTPTiny>.
 
 1;
