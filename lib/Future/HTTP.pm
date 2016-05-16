@@ -10,7 +10,7 @@ Future::HTTP - provide the most appropriate HTTP client with a Future API
 
 =head1 SYNOPSIS
 
-    my $ua = HTTP::Future->new();
+    my $ua = Future::HTTP->new();
     $ua->http_get('http://www.nethype.de/')->then(sub {
         my( $body, $data ) = @_;
         ...
@@ -45,9 +45,9 @@ $VERSION = '0.01';
 
 =head1 METHODS
 
-=head2 C<< HTTP::Future->new() >>
+=head2 C<< Future::HTTP->new() >>
 
-    my $ua = HTTP::Future->new();
+    my $ua = Future::HTTP->new();
 
 Creates a new instance of the HTTP client.
 

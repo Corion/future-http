@@ -111,6 +111,14 @@ sub http_post($self,$url,$body,%options) {
     )
 }
 
+=head1 METHODS
+
+=head2 C<< Future::HTTP::Tiny->new() >>
+
+    my $ua = Future::HTTP::Tiny->new();
+
+Creates a new instance of the HTTP client.
+
 =head2 C<< $ua->http_get($url, %options) >>
 
     $ua->http_get('http://example.com/',
