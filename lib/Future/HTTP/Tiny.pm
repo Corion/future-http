@@ -34,6 +34,26 @@ sub BUILDARGS {
     }
 }
 
+sub _ae_from_http_tiny( $self, $result ) {
+    # Convert the result back to a future
+    my( $body )        = delete $result->{content};
+    my( $headers )     = delete $result->{headers};
+    $headers->{Status} = delete $result->{status};
+    $headers->{Reason} = delete $result->{reason};
+    $headers->{URL}    = delete $result->{url};
+    
+    # Only filled with HTTP::Tiny 0.058+!
+    if( $result->{redirects}) {
+        my $r = $headers;
+        for my $http_tiny_result ( reverse @{ $result->{redirects}}) {
+            $r->{Redirect} = [ $self->_ae_from_http_tiny( $http_tiny_result ) ];
+            $r = $r->{Redirect}->[1]; # point to the new result headers
+        };
+    };
+    
+    return ($body, $headers)
+};
+
 sub _request($self, $method, $url, %options) {
     
     # Munge the parameters for AnyEvent::HTTP to HTTP::Tiny
@@ -53,10 +73,8 @@ sub _request($self, $method, $url, %options) {
         \%options
     );
     
-    # Convert the result back to a future
-    my( $body ) = delete $result->{content};
-    my( $headers ) = delete $result->{headers};
-    $headers->{Status} = delete $result->{status};
+    my( $body, $headers ) = $self->_ae_from_http_tiny( $result );
+    
     if( $headers->{Status} =~ /^2../ ) {
         return Future->done($body, $headers);
     } else {
