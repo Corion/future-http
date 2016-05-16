@@ -53,6 +53,16 @@ WriteMakefile1(
     },
     TEST_REQUIRES => {
         'Test::More' => 0,
+        
+        # For Test::HTTP::LocalServer
+        'FindBin' => 0,
+        'File::Spec' => 0,
+        'File::Temp' => 0,
+        'URI::URL' => 0,
+        'Carp' => 0,
+        'HTTP::Daemon' => 0,
+        'CGI' => 0,
+        'Getopt::Long' => 0,
     },
 
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
