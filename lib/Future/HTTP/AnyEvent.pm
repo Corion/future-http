@@ -55,9 +55,8 @@ sub http_head($self,$url,%options) {
     });
 }
 
-sub http_post($self,$url,%options) {
+sub http_post($self,$url,$body, %options) {
     as_future_cb( sub($done_cb,$fail_cb) {
-        my $body = delete $options{ body };
         AnyEvent::HTTP::http_post($url, $body, %options, $done_cb)
     })->then(sub ($body, $headers) {
         return $self->future_from_result($body, $headers);
