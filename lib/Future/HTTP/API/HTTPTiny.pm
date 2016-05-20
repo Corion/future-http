@@ -2,7 +2,7 @@ package # hide from indexer as it's not really ready
     Future::HTTP::API::HTTPTiny;
 use strict;
 use Filter::signatures;
-no warnings 'experimental';
+no warnings 'experimental::signatures';
 use feature 'signatures';
 require HTTP::Tiny;
 require URI;

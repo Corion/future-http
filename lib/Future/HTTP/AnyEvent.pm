@@ -5,7 +5,7 @@ use AnyEvent::HTTP ();
 use AnyEvent::Future 'as_future_cb';
 use Moo 2; # or Moo::Lax if you can't have Moo v2
 use Filter::signatures;
-no warnings 'experimental';
+no warnings 'experimental::signatures';
 use feature 'signatures';
 
 use vars qw($VERSION);

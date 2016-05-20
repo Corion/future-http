@@ -1,7 +1,7 @@
 package Future::HTTP;
 use strict;
 use Filter::signatures;
-no warnings 'experimental';
+no warnings 'experimental::signatures';
 use feature 'signatures';
 
 =head1 NAME
