@@ -27,7 +27,7 @@ my $ua = Future::HTTP::AnyEvent->new();
 my $url = $server->url;
 
 my ($body,$headers) = $ua->http_get($url)->get;
-like $headers->{Status}, qr/2../, "Retrieve URL using HTTP::Tiny backend";
+like $headers->{Status}, qr/2../, "Retrieve URL using AnyEvent::HTTP backend";
 is $headers->{URL}, $server->url, "We arrive at the expected URL"
     or diag Dumper $headers;
 
