@@ -47,7 +47,7 @@ WriteMakefile1(
     },
 
     PREREQ_PM => {
-        'Filter::signatures' => 0, # only needed for Perl <5.22
+        'Filter::signatures' => '0.02', # only needed for Perl <5.22
         'Moo'        => 2, # yeah, not all that great, but ...
         'Future'     => 0,
         'HTTP::Tiny' => 0, # our fallback, even distributed with Perl 5.14+
