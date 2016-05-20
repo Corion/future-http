@@ -1,0 +1,65 @@
+{
+   "abstract" : "provide the most appropriate HTTP client with a Future API",
+   "author" : [
+      "Max Maischein <corion@cpan.org>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.142060",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Future-HTTP",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "inc"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Filter::signatures" : "0",
+            "Future" : "0",
+            "HTTP::Tiny" : "0",
+            "Moo" : "2",
+            "perl" : "5.006"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "CGI" : "0",
+            "Carp" : "0",
+            "File::Spec" : "0",
+            "File::Temp" : "0",
+            "FindBin" : "0",
+            "Getopt::Long" : "0",
+            "HTTP::Daemon" : "0",
+            "Test::More" : "0",
+            "URI::URL" : "0"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/Corion/future-http.git",
+         "web" : "https://github.com/Corion/future-http"
+      }
+   },
+   "version" : "0.02"
+}
