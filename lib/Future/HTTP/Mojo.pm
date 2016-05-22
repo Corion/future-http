@@ -12,12 +12,14 @@ $VERSION = '0.02';
 
 has ua => (
     is => 'lazy',
-    default => sub { Mojolicious::UserAgent->new( %{ $_[0]->{ua_args}} ) }
+    default => sub { Mojo::UserAgent->new( %{ $_[0]->_ua_args } ) }
 );
 
 has _ua_args => (
     is => 'ro',
-    default => sub { +{} } ,
+    default => sub { warn "Building"; +{
+        max_redirects => 10,
+    } } ,
 );
 
 =head1 NAME
@@ -34,8 +36,9 @@ requests asynchronously.
 sub BUILDARGS {
     my( $class, %options ) = @_;
     
-    return {
-        _ua_args => \%options,
+    my @ua_args = keys %options ? (_ua_args => \%options) : ();
+    return +{
+        @ua_args
     }
 }
 
@@ -43,20 +46,20 @@ sub _ae_from_mojolicious( $self, $tx ) {
     # Convert the result back to a future
     my $res = $tx->res;
     my( $body )        = $res->body;
-    my %headers        = $res->headers->to_hash; # This means only a single header is allowed! Multiple cookies will vanish!
-    $headers{Status} = $res->code;
-    $headers{Reason} = '';
-    $headers{URL}    = $tx->req->url;
+    my $headers        = $res->headers->to_hash; # This means only a single header is allowed! Multiple cookies will vanish!
+    $headers->{Status} = $res->code;
+    $headers->{Reason} = '';
+    $headers->{URL}    = $tx->req->url;
     
     if( $tx->redirects) {
-        my $r = \%headers;
-        for my $mojolicious_result ( reverse $tx->redirects ) {
+        my $r = $headers;
+        for my $mojolicious_result ( reverse @{ $tx->redirects } ) {
             $r->{Redirect} = [ $self->_ae_from_mojolicious( $mojolicious_result ) ];
             $r = $r->{Redirect}->[1]; # point to the new result headers
         };
     };
     
-    return ($body, \%headers)
+    return ($body, $headers)
 };
 
 sub _request($self, $method, $url, %options) {
@@ -65,15 +68,15 @@ sub _request($self, $method, $url, %options) {
     # we should handle on_body parts here with the 'on read' callback
     
     # Execute the request (asynchronously)
-    my $tx = $self->ua->tx(
+    my $_tx = $self->ua->build_tx(
         $method => $url,
         $options{ headers } || {},
         $options{ body},
     );
     
     my $res = Future::Mojo->new();
-    $tx->on( finish => sub( $tx ) {
-        my( $body, $headers ) = $self->_ae_from_mojolicious( $tx->res );
+    $_tx = $self->ua->start($_tx, sub( $ua, $tx ) {
+        my( $body, $headers ) = $self->_ae_from_mojolicious( $tx );
     
         if( $headers->{Status} =~ /^2../ ) {
             $res->done($body, $headers);

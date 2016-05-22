@@ -12,7 +12,7 @@ $VERSION = '0.03';
 
 has ua => (
     is => 'lazy',
-    default => sub { HTTP::Tiny->new( %{ $_[0]->{ua_args}} ) }
+    default => sub { HTTP::Tiny->new( %{ $_[0]->_ua_args } ) }
 );
 
 has _ua_args => (
@@ -35,8 +35,9 @@ made in C<< ->http_request >> .
 sub BUILDARGS {
     my( $class, %options ) = @_;
     
-    return {
-        _ua_args => \%options,
+    my @ua_args = keys %options ? (_ua_args => \%options) : ();
+    return +{
+        @ua_args
     }
 }
 
