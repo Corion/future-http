@@ -49,7 +49,7 @@ WriteMakefile1(
     PREREQ_PM => {
         'Filter::signatures' => '0.02', # only needed for Perl <5.22
         'Moo'        => 2, # yeah, not all that great, but ...
-        'Future'     => 0,
+        'Future'     => '0.31', # Future 0.25 is incompatible as it doesn't allow Future->done
         'HTTP::Tiny' => 0, # our fallback, even distributed with Perl 5.14+
     },
     TEST_REQUIRES => {
