@@ -32,7 +32,7 @@ use vars qw($implementation @loops $VERSION);
 $VERSION = '0.02';
 
 @loops = (
-    # Mojolicious support would be nice, should use Future::Mojo and Mojolicious::UserAgent I guess
+    ['Mojo/IOLoop.pm' => 'Future::HTTP::Mojo' ],
     ['AnyEvent.pm'    => 'Future::HTTP::AnyEvent'],
     ['AE.pm'          => 'Future::HTTP::AnyEvent'],
     # POE support would be nice
