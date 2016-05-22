@@ -1,14 +1,14 @@
 package Future::HTTP::Mojo;
 use strict;
-#use Future::Mojo;
-#use Mojolicious::UserAgent;
+use Future::Mojo;
+use Mojo::UserAgent;
 use Moo 2; # or Moo::Lax if you can't have Moo v2
 use Filter::signatures;
 no warnings 'experimental::signatures';
 use feature 'signatures';
 
 use vars qw($VERSION);
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 has ua => (
     is => 'lazy',
@@ -17,7 +17,7 @@ has ua => (
 
 has _ua_args => (
     is => 'ro',
-    default => sub { warn "Building"; +{
+    default => sub { +{
         max_redirects => 10,
     } } ,
 );
@@ -119,9 +119,9 @@ sub http_post($self,$url,$body,%options) {
 
 =head1 METHODS
 
-=head2 C<< Future::HTTP::Tiny->new() >>
+=head2 C<< Future::HTTP::Mojo->new() >>
 
-    my $ua = Future::HTTP::Tiny->new();
+    my $ua = Future::HTTP::Mojo->new();
 
 Creates a new instance of the HTTP client.
 
@@ -183,11 +183,16 @@ like the function in L<AnyEvent::HTTP>.
 Posts the content to the URL and returns the body and headers,
 like the function in L<AnyEvent::HTTP>.
 
+Note that this subclass will automatically collect cookies. This
+may or may not be the behaviour you want.
+
 =head1 SEE ALSO
 
 L<Future>
 
 L<AnyEvent::HTTP> for the details of the API
+
+L<Mojo::UserAgent> for the backend
 
 =head1 REPOSITORY
 
