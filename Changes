@@ -3,6 +3,7 @@
       We need Future 0.33 now
       Actually, likely anything above 0.26 will work, but I'm too lazy to
       find out which versions work.
+    . Support Mojolicious as backend
 
 0.02 20160520
     . Fix test suite
