@@ -29,7 +29,7 @@ but has not materialized yet.
 =cut
 
 use vars qw($implementation @loops $VERSION);
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 @loops = (
     # Mojolicious support would be nice, should use Future::Mojo and Mojolicious::UserAgent I guess
