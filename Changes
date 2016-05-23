@@ -1,3 +1,9 @@
+0.04 20160523
+    . Attempt to be more compatible with older versions of HTTP::Tiny
+      Those older versions are distributed with Perl 5.12.x etc, so
+      compatibility with them allows us not to require an upgrade of the
+      core module.
+
 0.03 20160523
     . Tighten prerequisites
       We need Future 0.33 now
