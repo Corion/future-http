@@ -1,3 +1,7 @@
+0.05 20160524
+    . Old versions of HTTP::Tiny don't have some features, defang the tests
+      appropriately.
+
 0.04 20160523
     . Attempt to be more compatible with older versions of HTTP::Tiny
       Those older versions are distributed with Perl 5.12.x etc, so
