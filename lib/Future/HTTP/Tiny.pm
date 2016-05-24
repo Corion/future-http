@@ -184,6 +184,25 @@ like the function in L<AnyEvent::HTTP>.
 Posts the content to the URL and returns the body and headers,
 like the function in L<AnyEvent::HTTP>.
 
+=head1 COMPATIBILITY
+
+L<HTTP::Tiny> is a good backend because it is distributed with many versions
+of Perl. The drawback is that not all versions of L<HTTP::Tiny> support all
+features. The following features are unsupported on older versions of
+L<HTTP::Tiny>:
+
+=over 4
+
+=item C<< ->{URL} >>
+
+HTTP::Tiny versions before 0.018 didn't tell about 30x redirections.
+
+=item C<< ->{redirects} >>
+
+HTTP::Tiny versions before 0.058 didn't record the chain of redirects.
+
+=back
+
 =head1 SEE ALSO
 
 L<Future>

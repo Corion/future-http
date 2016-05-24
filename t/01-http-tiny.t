@@ -26,8 +26,11 @@ is $headers->{URL}, $server->url, "We arrive at the expected URL"
 my $u = $server->redirect( 'foo' );
 ($body,$headers) = $ua->http_get($u)->get;
 like $headers->{Status}, qr/2../, "Retrieve URL using redirect for a single redirection";
-is $headers->{URL}, $url . 'foo', "We arrive at the expected URL"
-    or diag Dumper $headers;
+# HTTP::Tiny 0.017 didn't record the final URL
+if( $HTTP::Tiny::VERSION >= 0.018 ) {
+    is $headers->{URL}, $url . 'foo', "We arrive at the expected URL"
+        or diag Dumper $headers;
+};
 # The redirect detection only came with HTTP::Tiny 0.058+
 if( $HTTP::Tiny::VERSION >= 0.058 ) {
     ok exists $headers->{Redirect}, "We were redirected here";
@@ -37,8 +40,11 @@ if( $HTTP::Tiny::VERSION >= 0.058 ) {
 $u = $server->redirect( 'redirect/foo' );
 ($body,$headers) = $ua->http_get($u)->get;
 like $headers->{Status}, qr/2../, "Retrieve URL using redirect for a double redirection";
-is $headers->{URL}, $url . 'foo', "We arrive at the expected URL"
-    or diag Dumper $headers;
+# HTTP::Tiny 0.017 didn't record the final URL
+if( $HTTP::Tiny::VERSION >= 0.018 ) {
+    is $headers->{URL}, $url . 'foo', "We arrive at the expected URL"
+        or diag Dumper $headers;
+};
 # The redirect detection only came with HTTP::Tiny 0.058+
 if( HTTP::Tiny->VERSION >= 0.058 ) {
     ok exists $headers->{Redirect}, "We were redirected here";
