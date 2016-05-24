@@ -9,7 +9,7 @@ no warnings 'experimental::signatures';
 use feature 'signatures';
 
 use vars qw($VERSION);
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 =head1 NAME
 
