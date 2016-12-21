@@ -11,10 +11,11 @@ Future::HTTP - provide the most appropriate HTTP client with a Future API
 =head1 SYNOPSIS
 
     my $ua = Future::HTTP->new();
-    $ua->http_get('http://www.nethype.de/')->then(sub {
+    my $res = $ua->http_get('http://www.nethype.de/')->then(sub {
         my( $body, $data ) = @_;
         ...
-    })
+        return $body
+    })->get();
 
 This module is a wrapper combining L<Future> with the API provided
 by L<AnyEvent::HTTP>. The backend used for the HTTP protocols
@@ -22,8 +23,9 @@ depends on whether one of the event loops is loaded.
 
 =head2 Supported event loops
 
-Currently only L<HTTP::Tiny> and L<AnyEvent> are supported. Support
-is planned for L<LWP::UserAgent>, L<Mojolicious> and L<IO::Async>
+Currently only L<HTTP::Tiny>,L<Mojolicious> and L<AnyEvent> are supported.
+Support
+is planned for L<LWP::UserAgent> and L<IO::Async>
 but has not materialized yet.
 
 =cut
@@ -67,6 +69,9 @@ sub best_implementation( $class, @candidates ) {
     };
 
     # Find the currently running/loaded event loop(s)
+    #use Data::Dumper;
+    #warn Dumper \%INC;
+    #warn Dumper \@candidates;
     my @applicable_implementations = map {
         $_->[1]
     } grep {
@@ -85,35 +90,35 @@ sub best_implementation( $class, @candidates ) {
 
 =head2 C<< $ua->http_get($url, %options) >>
 
-    $ua->http_get('http://example.com/',
+    my $res = $ua->http_get('http://example.com/',
         headers => {
             'Accept' => 'text/json',
         },
     )->then(sub {
         my( $body, $headers ) = @_;
         ...
-    });
+    })->get;
 
 Retrieves the URL and returns the body and headers, like
 the function in L<AnyEvent::HTTP>.
 
 =head2 C<< $ua->http_head($url, %options) >>
 
-    $ua->http_head('http://example.com/',
+    my $res = $ua->http_head('http://example.com/',
         headers => {
             'Accept' => 'text/json',
         },
     )->then(sub {
         my( $body, $headers ) = @_;
         ...
-    });
+    })->get;
 
 Retrieves the header of the URL and returns the headers,
 like the function in L<AnyEvent::HTTP>.
 
 =head2 C<< $ua->http_post($url, $body, %options) >>
 
-    $ua->http_post('http://example.com/api',
+    my $res = $ua->http_post('http://example.com/api',
         '{token:"my_json_token"}',
         headers => {
             'Accept' => 'text/json',
@@ -121,14 +126,14 @@ like the function in L<AnyEvent::HTTP>.
     )->then(sub {
         my( $body, $headers ) = @_;
         ...
-    });
+    })->get;
 
 Posts the content to the URL and returns the body and headers,
 like the function in L<AnyEvent::HTTP>.
 
 =head2 C<< $ua->http_request($method, $url, %options) >>
 
-    $ua->http_request('PUT' => 'http://example.com/api',
+    my $res = $ua->http_request('PUT' => 'http://example.com/api',
         headers => {
             'Accept' => 'text/json',
         },
@@ -136,7 +141,7 @@ like the function in L<AnyEvent::HTTP>.
     )->then(sub {
         my( $body, $headers ) = @_;
         ...
-    });
+    })->get;
 
 Posts the content to the URL and returns the body and headers,
 like the function in L<AnyEvent::HTTP>.
