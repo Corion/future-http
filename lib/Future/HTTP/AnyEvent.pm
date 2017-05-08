@@ -27,6 +27,7 @@ sub future_from_result {
     if( $headers->{Status} =~ /^2../ ) {
         return Future->done($body, $headers);
     } else {
+        $body ||= $headers->{Reason}; # just in case we didn't get a body at all
         return Future->fail($body, $headers);
     }
 }
