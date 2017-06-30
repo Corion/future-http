@@ -32,6 +32,9 @@ install:
   - build-dist
   - cd $BUILD_DIR
   - cpan-install ExtUtils::MakeMaker~6.68
+  - cpan-install Mojolicious Future::Mojo
+  - cpan-install AnyEvent::HTTP AnyEvent::Future
+  - cpan-install Capture::Tiny
   - cpan-install --deps
 
 script:
