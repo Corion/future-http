@@ -40,6 +40,11 @@ $VERSION = '0.06';
     # POE support would be nice
     # IO::Async support would be nice, using Net::Async::HTTP
     # LWP::UserAgent support would be nice
+
+    # A threaded backend would also be nice but likely brings in other
+    # interesting problems. How will we load this? We have two prerequisites
+    # now, threads.pm and HTTP::Tiny...
+    ['threads.pm' => 'Future::HTTP::Tiny::threaded' ],
     
     # The fallback, will always catch due to loading Future::HTTP
     ['Future/HTTP.pm' => 'Future::HTTP::Tiny'],
