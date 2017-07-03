@@ -8,7 +8,7 @@ use Future::HTTP;
 is( Future::HTTP->best_implementation(), 'Future::HTTP::Tiny', "The default backend is HTTP::Tiny");
 
 # If we can load a backend, also make sure it can be chosen:
-for my $known_implementation (@Future::HTTP::loops) {
+for my $known_implementation (['Mojo/IOLoop.pm' => 'Future::HTTP::Mojo' ]) {
     my( $module_file, $implementation ) = @$known_implementation;
     if( eval { require $module_file; 1 } ) {
         if( eval "require $implementation; 1" ) {
