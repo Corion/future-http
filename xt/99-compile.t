@@ -5,6 +5,11 @@ use strict;
 use File::Find;
 use Test::More;
 BEGIN {
+    if( $ENV{CI} ) {
+        plan skip_all => "Not testing compilation on CI as some modules might not be there";
+        exit 0;
+    }
+
     eval 'use Capture::Tiny ":all"; 1';
     if ($@) {
         plan skip_all => "Capture::Tiny needed for testing";
