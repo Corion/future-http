@@ -31,7 +31,7 @@ but has not materialized yet.
 =cut
 
 use vars qw($implementation @loops $VERSION);
-$VERSION = '0.06';
+$VERSION = '0.07';
 
 @loops = (
     ['Mojo/IOLoop.pm' => 'Future::HTTP::Mojo' ],
