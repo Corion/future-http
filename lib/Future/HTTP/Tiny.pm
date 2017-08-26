@@ -10,6 +10,8 @@ use feature 'signatures';
 use vars qw($VERSION);
 $VERSION = '0.07';
 
+with 'Future::HTTP::Handler';
+
 has ua => (
     is => 'lazy',
     default => sub { HTTP::Tiny->new( %{ $_[0]->_ua_args } ) }
@@ -80,13 +82,10 @@ sub _request($self, $method, $url, %options) {
         \%options
     );
     
+    my $res = Future->new;
     my( $body, $headers ) = $self->_ae_from_http_tiny( $result, $url );
-    
-    if( $headers->{Status} =~ /^2../ ) {
-        return Future->done($body, $headers);
-    } else {
-        return Future->fail($body, $headers);
-    }
+    $self->http_response_received( $res, $body, $headers );
+    $res
 }
 
 sub http_request($self,$method,$url,%options) {

@@ -15,6 +15,8 @@ use feature 'signatures';
 use vars qw($VERSION);
 $VERSION = '0.07';
 
+with 'Future::HTTP::Handler';
+
 =head1 NAME
 
 Future::HTTP::AnyEvent - asynchronous HTTP client with a Future interface
@@ -28,12 +30,10 @@ sub BUILDARGS( $class, %options ) {
 sub future_from_result {
     my( $self, $body, $headers ) = @_;
     
-    if( $headers->{Status} =~ /^2../ ) {
-        return Future->done($body, $headers);
-    } else {
-        $body ||= $headers->{Reason}; # just in case we didn't get a body at all
-        return Future->fail($body, $headers);
-    }
+    $body ||= $headers->{Reason}; # just in case we didn't get a body at all
+    my $res = Future->new();
+    $self->http_response_received( $res, $body, $headers );
+    $res
 }
 
 sub http_request($self,$method,$url,%options) {

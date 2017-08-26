@@ -10,6 +10,8 @@ use feature 'signatures';
 use vars qw($VERSION);
 $VERSION = '0.07';
 
+with 'Future::HTTP::Handler';
+
 has ua => (
     is => 'lazy',
     default => sub { Mojo::UserAgent->new( %{ $_[0]->_ua_args } ) }
@@ -77,12 +79,8 @@ sub _request($self, $method, $url, %options) {
     my $res = Future::Mojo->new();
     $_tx = $self->ua->start($_tx, sub( $ua, $tx ) {
         my( $body, $headers ) = $self->_ae_from_mojolicious( $tx );
-    
-        if( $headers->{Status} =~ /^2../ ) {
-            $res->done($body, $headers);
-        } else {
-            $res->fail('error when connecting', $headers);
-        }
+        
+        $self->http_response_received( $res, $body, $headers );
     });
     
     $res
