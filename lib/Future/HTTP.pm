@@ -23,17 +23,41 @@ depends on whether one of the event loops is loaded.
 
 =head2 Supported event loops
 
-Currently only L<HTTP::Tiny>,L<Mojolicious> and L<AnyEvent> are supported.
+Currently, the following backends are supported:
+
+=over 4
+
+=item *
+
+L<HTTP::Tiny>
+
+=item *
+
+L<HTTP::Tiny::Paranoid>
+
+=item *
+
+L<Mojolicious>
+
+=item *
+
+L<AnyEvent>
+
+=item *
+
+L<IO::Async>
+ 
+=back
+
 Support
-is planned for L<LWP::UserAgent> and L<IO::Async>
+is planned for L<LWP::UserAgent> and L<POE>
 but has not materialized yet.
 
 =cut
 
-use vars qw($implementation @loops $VERSION);
-$VERSION = '0.07';
+our $VERSION = '0.07';
 
-@loops = (
+our @loops = (
     ['IO/Async.pm'    => 'Future::HTTP::NetAsync' ],
     ['Mojo/IOLoop.pm' => 'Future::HTTP::Mojo' ],
     ['AnyEvent.pm'    => 'Future::HTTP::AnyEvent'],
@@ -51,6 +75,7 @@ $VERSION = '0.07';
     # The fallback, will always catch due to loading Future::HTTP
     ['Future/HTTP.pm' => 'Future::HTTP::Tiny'],
 );
+our $implementation;
 
 =head1 METHODS
 
@@ -181,7 +206,7 @@ Max Maischein C<corion@cpan.org>
 
 =head1 COPYRIGHT (c)
 
-Copyright 2016 by Max Maischein C<corion@cpan.org>.
+Copyright 2016-2017 by Max Maischein C<corion@cpan.org>.
 
 =head1 LICENSE
 
