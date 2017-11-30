@@ -34,11 +34,11 @@ use vars qw($implementation @loops $VERSION);
 $VERSION = '0.07';
 
 @loops = (
+    ['IO/Async.pm'    => 'Future::HTTP::NetAsync' ],
     ['Mojo/IOLoop.pm' => 'Future::HTTP::Mojo' ],
     ['AnyEvent.pm'    => 'Future::HTTP::AnyEvent'],
     ['AE.pm'          => 'Future::HTTP::AnyEvent'],
     # POE support would be nice
-    # IO::Async support would be nice, using Net::Async::HTTP
     # LWP::UserAgent support would be nice
 
     # A threaded backend would also be nice but likely brings in other
@@ -46,6 +46,8 @@ $VERSION = '0.07';
     # now, threads.pm and HTTP::Tiny...
     ['threads.pm' => 'Future::HTTP::Tiny::threaded' ],
     
+    ['HTTP/Tiny/Paranoid.pm' => 'Future::HTTP::Tiny::Paranoid'],
+
     # The fallback, will always catch due to loading Future::HTTP
     ['Future/HTTP.pm' => 'Future::HTTP::Tiny'],
 );
