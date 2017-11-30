@@ -16,6 +16,11 @@ my $ok = eval {
 my $server = Test::HTTP::LocalServer->spawn(
     #debug => 1
 );
+my $err = $@;
+if( !$ok) {
+    plan skip_all => "Couldn't load Future::HTTP::Tiny::Paranoid: $err";
+    exit;
+};
 
 diag( "Version of HTTP::Tiny::Paranoid: " . HTTP::Tiny::Paranoid->VERSION );
 my $url = $server->url;
