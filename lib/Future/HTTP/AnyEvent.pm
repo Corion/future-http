@@ -29,7 +29,7 @@ sub BUILDARGS( $class, %options ) {
 
 sub future_from_result {
     my( $self, $body, $headers ) = @_;
-    
+
     $body ||= $headers->{Reason}; # just in case we didn't get a body at all
     my $res = Future->new();
     $self->http_response_received( $res, $body, $headers );
@@ -37,35 +37,27 @@ sub future_from_result {
 }
 
 sub http_request($self,$method,$url,%options) {
-    as_future_cb( sub($done_cb, $fail_cb) {
-        AnyEvent::HTTP::http_request($method => $url, %options, $done_cb)
-    })->then(sub ($body, $headers) {
+    my $res = AnyEvent::Future->new()->then(sub ($body, $headers) {
         return $self->future_from_result($body, $headers);
     });
+
+    AnyEvent::HTTP::http_request($method => $url, %options, sub ($body, $headers) {
+        $res->done( $body,$headers )
+    });
+
+    $res
 }
 
 sub http_get($self,$url,%options) {
-    as_future_cb( sub($done_cb, $fail_cb) {
-        AnyEvent::HTTP::http_get($url, %options, $done_cb)
-    })->then(sub ($body, $headers) {
-        return $self->future_from_result($body, $headers);
-    });
+    $self->http_request('GET',$url, %options)
 }
 
 sub http_head($self,$url,%options) {
-    as_future_cb( sub($done_cb, $fail_cb) {
-        AnyEvent::HTTP::http_head($url, %options, $done_cb)
-    })->then(sub ($body, $headers) {
-        return $self->future_from_result($body, $headers);
-    });
+    $self->http_request('HEAD',$url, %options)
 }
 
 sub http_post($self,$url,$body, %options) {
-    as_future_cb( sub($done_cb,$fail_cb) {
-        AnyEvent::HTTP::http_post($url, $body, %options, $done_cb)
-    })->then(sub ($body, $headers) {
-        return $self->future_from_result($body, $headers);
-    });
+    $self->http_request('POST',$url, body => $body, %options)
 }
 
 =head1 DESCRIPTION
@@ -148,7 +140,7 @@ L<AnyEvent::HTTP> for the details of the API
 
 =head1 REPOSITORY
 
-The public repository of this module is 
+The public repository of this module is
 L<http://github.com/Corion/future-http>.
 
 =head1 SUPPORT
