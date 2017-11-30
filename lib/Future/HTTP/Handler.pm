@@ -4,6 +4,14 @@ use Filter::signatures;
 no warnings 'experimental::signatures';
 use feature 'signatures';
 
+our $VERSION = '0.08';
+
+=head1 NAME
+
+Future::HTTP::Handler - common role for handling HTTP responses
+
+=cut
+
 has 'on_http_response' => (
     is => 'rw',
 );
