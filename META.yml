@@ -29,6 +29,7 @@ no_index:
 requires:
   Filter::signatures: '0.03'
   Future: '0.31'
+  HTTP::Headers: '6.07'
   HTTP::Tiny: '0'
   Moo: '2'
   perl: '5.006'
