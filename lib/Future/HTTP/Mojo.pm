@@ -68,11 +68,12 @@ sub _request($self, $method, $url, %options) {
     # Munge the parameters from AnyEvent::HTTP to Mojolicious::UserAgent
     # we should handle on_body parts here with the 'on read' callback
     
+    my $body = defined $options{ body } ? $options{ body } : '';
     # Execute the request (asynchronously)
     my $_tx = $self->ua->build_tx(
         $method => $url,
         $options{ headers } || {},
-        $options{ body},
+        $body,
     );
     
     my $res = Future::Mojo->new();
