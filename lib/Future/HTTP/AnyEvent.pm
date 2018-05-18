@@ -40,7 +40,9 @@ sub http_request($self,$method,$url,%options) {
         return $self->future_from_result($body, $headers);
     });
 
-    AnyEvent::HTTP::http_request($method => $url, %options, sub ($body, $headers) {
+    my $r;
+    $r = AnyEvent::HTTP::http_request($method => $url, %options, sub ($body, $headers) {
+        undef $r;
         $res->done( $body,$headers )
     });
 
