@@ -26,6 +26,16 @@ This is the default backend. It is chosen if no supported event loop could
 be detected. It will execute the requests synchronously as they are
 made in C<< ->http_request >> .
 
+=head1 Whitelist / Blacklist
+
+You can set up the whitelist and blacklist through the global accessors:
+
+  # Allow access to localhost
+  HTTP::Tiny::Paranoid->whitelisted_hosts([ 'localhost', '127.0.0.1' ]);
+
+  # Deny access to localhost
+  HTTP::Tiny::Paranoid->blacklisted_hosts([ 'localhost', '127.0.0.1' ]);
+
 =cut
 
 =head1 METHODS
