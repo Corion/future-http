@@ -46,7 +46,7 @@ L<AnyEvent>
 =item *
 
 L<IO::Async>
- 
+
 =back
 
 Support
@@ -69,7 +69,7 @@ our @loops = (
     # interesting problems. How will we load this? We have two prerequisites
     # now, threads.pm and HTTP::Tiny...
     ['threads.pm' => 'Future::HTTP::Tiny::threaded' ],
-    
+
     ['HTTP/Tiny/Paranoid.pm' => 'Future::HTTP::Tiny::Paranoid'],
 
     # The fallback, will always catch due to loading Future::HTTP
@@ -89,13 +89,13 @@ Creates a new instance of the HTTP client.
 
 sub new($factoryclass, @args) {
     $implementation ||= $factoryclass->best_implementation();
-    
+
     # return a new instance
     $implementation->new(@args);
 }
 
 sub best_implementation( $class, @candidates ) {
-    
+
     if(! @candidates) {
         @candidates = @loops;
     };
@@ -109,7 +109,7 @@ sub best_implementation( $class, @candidates ) {
     } grep {
         $INC{$_->[0]}
     } @candidates;
-    
+
     # Check which one we can load:
     for my $impl (@applicable_implementations) {
         if( eval "require $impl; 1" ) {
@@ -186,7 +186,7 @@ L<AnyEvent::HTTP> for the details of the API
 
 =head1 REPOSITORY
 
-The public repository of this module is 
+The public repository of this module is
 L<http://github.com/Corion/future-http>.
 
 =head1 SUPPORT
