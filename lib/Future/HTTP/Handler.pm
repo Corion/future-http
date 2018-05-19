@@ -27,6 +27,7 @@ sub http_response_received( $self, $res, $body, $headers ) {
     }
 }
 
+no warnings 'once';
 sub decode_content {
     my($self, $body, $headers) = @_;
     my $content_ref = \$body;
@@ -42,7 +43,7 @@ sub decode_content {
                 require IO::Uncompress::Gunzip;
                 my $output;
                 IO::Uncompress::Gunzip::gunzip($content_ref, \$output, Transparent => 0)
-                or die "Can't gunzip content: $IO::Uncompress::Gunzip::GunzipError";
+                    or die "Can't gunzip content: $IO::Uncompress::Gunzip::GunzipError";
                 $content_ref = \$output;
                 $content_ref_iscopy++;
             }
