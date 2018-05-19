@@ -142,7 +142,7 @@ L<AnyEvent::HTTP> for the details of the API
 =head1 REPOSITORY
 
 The public repository of this module is
-L<http://github.com/Corion/future-http>.
+L<https://github.com/Corion/future-http>.
 
 =head1 SUPPORT
 

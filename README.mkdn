@@ -103,8 +103,8 @@ like the function in [AnyEvent::HTTP](https://metacpan.org/pod/AnyEvent::HTTP).
 
 # REPOSITORY
 
-The public repository of this module is 
-[http://github.com/Corion/future-http](http://github.com/Corion/future-http).
+The public repository of this module is
+[https://github.com/Corion/future-http](https://github.com/Corion/future-http).
 
 # SUPPORT
 
