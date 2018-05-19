@@ -55,7 +55,7 @@ but has not materialized yet.
 
 =cut
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 our @loops = (
     ['IO/Async.pm'    => 'Future::HTTP::NetAsync' ],
