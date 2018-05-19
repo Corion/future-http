@@ -1,4 +1,4 @@
-0.09 to be released
+0.09 20180519
     + Silence warning when using Mojolicious
       Thanks to pplu and Grinnz for reporting it and the diagnosis
       This addresses https://github.com/Corion/future-http/issues/2
