@@ -1,9 +1,5 @@
 .gitignore
 Changes
-inc/IO/Catch.pm
-inc/Test/HTTP/cookie-server
-inc/Test/HTTP/LocalServer.pm
-inc/Test/HTTP/log-server
 lib/Future/HTTP.pm
 lib/Future/HTTP/AnyEvent.pm
 lib/Future/HTTP/API/HTTPTiny.pm

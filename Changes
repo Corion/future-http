@@ -4,7 +4,8 @@
       This addresses https://github.com/Corion/future-http/issues/2
     ! The response body is now always decoded like HTTP::Message->decoded_content
       If you need access to the raw, undecoded content, please tell me
-
+    . Switch from including Test::HTTP::LocalServer to loading it as
+      a test prerequisite
 
 0.08 20171129
     ! 3xx status codes are not treated as errors anymore
