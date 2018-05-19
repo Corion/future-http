@@ -33,6 +33,19 @@ WriteMakefile1(
                 type => 'git',
             }
         },
+        prereqs => {
+            runtime => {
+                recommends => {
+                    # For decoding the various content encodings
+                    'IO::Uncompress::Gunzip'     => 0,
+                    'IO::Uncompress::Bunzip2'    => 0,
+                    'IO::Uncompress::Inflate'    => 0,
+                    'IO::Uncompress::RawInflate' => 0,
+                    'MIME::QuotedPrint'          => 0,
+                    'MIME::Base64'               => 0,
+                }
+            },
+        },
     },
     
     MIN_PERL_VERSION => '5.006',

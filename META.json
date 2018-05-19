@@ -31,6 +31,14 @@
          }
       },
       "runtime" : {
+         "recommends" : {
+            "IO::Uncompress::Bunzip2" : "0",
+            "IO::Uncompress::Gunzip" : "0",
+            "IO::Uncompress::Inflate" : "0",
+            "IO::Uncompress::RawInflate" : "0",
+            "MIME::Base64" : "0",
+            "MIME::QuotedPrint" : "0"
+         },
          "requires" : {
             "Filter::signatures" : "0.03",
             "Future" : "0.31",
