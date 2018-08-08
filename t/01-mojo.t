@@ -17,6 +17,8 @@ if( !$ok) {
     exit;
 };
 
+plan tests => 11;
+
 diag( "Version of Mojolicious: " . Mojolicious->VERSION );
 
 my $server = Test::HTTP::LocalServer->spawn(

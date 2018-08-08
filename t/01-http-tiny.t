@@ -9,6 +9,7 @@ use Test::HTTP::LocalServer;
 use Future::HTTP::Tiny;
 use HTTP::Tiny;
 
+plan tests => 10;
 my $server = Test::HTTP::LocalServer->spawn(
     #debug => 1
 );
