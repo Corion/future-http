@@ -1,3 +1,8 @@
+0.10 20180520
+    + We now want HTTP::Tiny::Paranoid 0.07+
+      0.04 had errors when testing
+      ( http://www.cpantesters.org/cpan/report/7d410262-5b42-11e8-8d7e-b001725e5915 )
+
 0.09 20180519
     + Silence warning when using Mojolicious
       Thanks to pplu and Grinnz for reporting it and the diagnosis
