@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/Corion/future-http.svg?branch=master)](https://github.com/Corion/future-http)
+[![Build Status](https://travis-ci.org/Corion/future-http.svg?branch=master)](https://travis-ci.org/Corion/future-http)
 
 # NAME
 
