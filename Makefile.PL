@@ -19,7 +19,7 @@ regen_README($main_file);
 
 my @tests = map { glob $_ } 't/*.t', 't/*/*.t';
 
-WriteMakefile1(
+my %module = (
     NAME                => $module,
     AUTHOR              => q{Max Maischein <corion@cpan.org>},
     VERSION_FROM        => $main_file,
@@ -77,6 +77,10 @@ WriteMakefile1(
 
     test            => { TESTS => join( ' ', @tests ) },
 );
+
+sub get_module_info { %module };
+
+WriteMakefile1( get_module_info() );
 
 1;
 
@@ -170,8 +174,8 @@ sub pod_section {
 
     my @section =
         grep { /^=head1\s+$section/.../^=/ } <$fh>;
-    pop @section if $section[-1] =~ /^=/;
-    unshift @section if $remove_heading;
+    pop @section if $section[-1] and $section[-1] =~ /^=/;
+    shift @section if $remove_heading;
 
     # Trim the section
     if( @section ) {
