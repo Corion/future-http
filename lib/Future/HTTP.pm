@@ -129,7 +129,7 @@ sub best_implementation( $class, @candidates ) {
         },
     )->then(sub {
         my( $body, $headers ) = @_;
-        ...
+        # ... handle the response
     })->get;
 
 Retrieves the URL and returns the body and headers, like
