@@ -10,7 +10,7 @@ Future::HTTP - provide the most appropriate HTTP client with a Future API
     my $ua = Future::HTTP->new();
     my $res = $ua->http_get('http://www.nethype.de/')->then(sub {
         my( $body, $data ) = @_;
-        ...
+        # ... handle the response
         return $body
     })->get();
 
@@ -48,7 +48,7 @@ Creates a new instance of the HTTP client.
         },
     )->then(sub {
         my( $body, $headers ) = @_;
-        ...
+        # ... handle the response
     })->get;
 
 Retrieves the URL and returns the body and headers, like
