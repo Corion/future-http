@@ -16,8 +16,8 @@ require './Makefile.PL';
 our %module = get_module_info();
 
 my @files;
-my $blib = File::Spec->catfile(qw(blib lib));
-find(\&wanted, grep { -d } ($blib));
+#my $blib = File::Spec->catfile(qw(blib lib));
+find(\&wanted, grep { -d } ('lib'));
 
 if( my $exe = $module{EXE_FILES}) {
     push @files, @$exe;
@@ -90,7 +90,6 @@ if(! is 0+@out_of_date, 0, "All files have a current copyright year ($last_modif
     diag sprintf q{    perl -i -ple 's!(\bcopyright\b.*?\d{4}-)(\d{4})\b!${1}%s!i' %s},
         $this_year,
         join ' ',
-        map { s!^blib[\\/]!!; $_ }
         map { $_->{file} } @out_of_date;
 };
 
