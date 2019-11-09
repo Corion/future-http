@@ -77,6 +77,7 @@ push @loops, (
     ['Future/HTTP.pm' => 'Future::HTTP::Tiny'],
 );
 our $implementation;
+our $default = 'Future::HTTP::Tiny';
 
 =head1 METHODS
 
@@ -111,13 +112,22 @@ sub best_implementation( $class, @candidates ) {
         $INC{$_->[0]}
     } @candidates;
 
+    if( ! @applicable_implementations ) {
+        @applicable_implementations = map {$_->[1]} @candidates;
+    }
+
     # Check which one we can load:
     for my $impl (@applicable_implementations) {
         if( eval "require $impl; 1" ) {
             return $impl;
         };
     };
+
+    # This will crash and burn, but that's how it is
+    return $default;
 };
+
+1;
 
 # We support the L<AnyEvent::HTTP> API first
 
