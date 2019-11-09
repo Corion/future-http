@@ -133,7 +133,7 @@ sub mirror( $self, $url, $outfile, $args ) {
         }
         $response_f->{success} ||= $response_f->{status} eq '304';
         unlink $tempfile;
-        
+
         $response_f
     });
     return $response_f;
