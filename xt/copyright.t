@@ -35,7 +35,7 @@ sub collect {
         # diag `git log -1 --pretty="format:%ct" "$file"`;
         $modified_ts = `git log -1 --pretty="format:%ct" "$file"`;
     } else {
-        $modified_ts = (stat($_))[9];
+        $modified_ts = (stat($file))[9];
     }
 
     my $modified_year;
@@ -64,6 +64,13 @@ sub collect {
         copyright => $copyright,
         modified => $modified_year,
     };
+};
+
+if( !$is_checkout ) {
+    SKIP: {
+        skip "Not a repository checkout, not checking copyright", 1;
+    };
+    exit;
 };
 
 my @results;
