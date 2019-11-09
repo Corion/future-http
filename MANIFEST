@@ -29,6 +29,7 @@ t/01-mojo.t
 t/01-netasync.t
 t/02-changedefault1.t
 t/02-changedefault2.t
+testrules.yml
 xt/99-changes.t
 xt/99-compile.t
 xt/99-manifest.t
