@@ -16,5 +16,7 @@ Makefile$
 ^cpan/
 ^MYMETA
 ^.releaserc
+^.prove
+^.appveyor.yml
 ^Future-HTTP-.*/
 ^Future-HTTP-.*.tar.gz$
