@@ -123,9 +123,9 @@ sub http_post($self,$url,$body,%options) {
 
 =head1 METHODS
 
-=head2 C<< Future::HTTP::Mojo->new() >>
+=head2 C<< Future::HTTP::NetAsync->new() >>
 
-    my $ua = Future::HTTP::Mojo->new();
+    my $ua = Future::HTTP::NetAsync->new();
 
 Creates a new instance of the HTTP client.
 
@@ -196,7 +196,7 @@ L<Future>
 
 L<AnyEvent::HTTP> for the details of the API
 
-L<Mojo::UserAgent> for the backend
+L<Net::Async::HTTP> for the backend
 
 =head1 REPOSITORY
 
