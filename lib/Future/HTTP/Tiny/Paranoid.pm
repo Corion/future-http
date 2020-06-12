@@ -46,6 +46,10 @@ You can set up the whitelist and blacklist through the global accessors:
 
 Creates a new instance of the HTTP client.
 
+=head2 C<< $ua->is_async() >>
+
+Returns false, because this backend is synchronous.
+
 =head2 C<< $ua->http_get($url, %options) >>
 
     $ua->http_get('http://example.com/',

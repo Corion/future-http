@@ -43,6 +43,8 @@ sub BUILDARGS {
     }
 }
 
+sub is_async { !0 }
+
 sub _ae_from_mojolicious( $self, $tx ) {
     # Convert the result back to a future
     my $res = $tx->res;
@@ -122,6 +124,10 @@ sub http_post($self,$url,$body,%options) {
     my $ua = Future::HTTP::Mojo->new();
 
 Creates a new instance of the HTTP client.
+
+=head2 C<< $ua->is_async() >>
+
+Returns true, because this backend is asynchronous.
 
 =head2 C<< $ua->http_get($url, %options) >>
 

@@ -26,6 +26,8 @@ sub BUILDARGS( $class, %options ) {
     return {}
 }
 
+sub is_async { !0 }
+
 sub future_from_result {
     my( $self, $body, $headers ) = @_;
 
@@ -74,6 +76,10 @@ using L<AnyEvent::HTTP>.
     my $ua = Future::HTTP::AnyEvent->new();
 
 Creates a new instance of the HTTP client.
+
+=head2 C<< $ua->is_async() >>
+
+Returns true, because this backend is asynchronous.
 
 =head2 C<< $ua->http_get($url, %options) >>
 
