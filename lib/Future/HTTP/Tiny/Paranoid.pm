@@ -18,7 +18,7 @@ has '+ua' => (
 
 =head1 NAME
 
-Future::HTTP::Tiny - synchronous HTTP client with a Future interface
+Future::HTTP::Tiny::Paranoid - synchronous HTTP client with a Future interface
 
 =head1 DESCRIPTION
 
@@ -40,9 +40,9 @@ You can set up the whitelist and blacklist through the global accessors:
 
 =head1 METHODS
 
-=head2 C<< Future::HTTP::Tiny->new() >>
+=head2 C<< Future::HTTP::Tiny::Paranoid->new() >>
 
-    my $ua = Future::HTTP::Tiny->new();
+    my $ua = Future::HTTP::Tiny::Paranoid->new();
 
 Creates a new instance of the HTTP client.
 
