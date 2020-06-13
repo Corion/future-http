@@ -42,13 +42,17 @@ sub check {
 }
 
 my %skip = (
-    'Future::HTTP::AnyEvent' => 1,
-    'Future::HTTP::Mojo' => 1,
-    'Future::HTTP::NetAsync' => 1,
-    'Future::HTTP::Tiny::Paranoid' => 1,
+    'lib/Future/HTTP/AnyEvent.pm' => 1,
+    'lib/Future/HTTP/Mojo.pm' => 1,
+    'lib/Future/HTTP/NetAsync.pm' => 1,
+    'lib/Future/HTTP/Tiny/Paranoid.pm' => 1,
+    'blib/lib/Future/HTTP/AnyEvent.pm' => 1,
+    'blib/lib/Future/HTTP/Mojo.pm' => 1,
+    'blib/lib/Future/HTTP/NetAsync.pm' => 1,
+    'blib/lib/Future/HTTP/Tiny/Paranoid.pm' => 1,
 );
 
-if(( $ENV{USER} || '') eq 'corion' ) {
+if(( $ENV{USER} || '') eq 'corion' and (`hostname`||'') eq 'outerlimits') {
     %skip = ();
 }
 
