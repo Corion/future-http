@@ -127,7 +127,16 @@ sub best_implementation( $class, @candidates ) {
     return $default;
 };
 
-1;
+=head2 C<< $ua->is_async() >>
+
+Returns true if the selected backend is asynchronous, false if it is
+synchronous.
+
+=cut
+
+sub is_async {
+    die "method is_async must be overloaded by subclass\n";
+}
 
 # We support the L<AnyEvent::HTTP> API first
 

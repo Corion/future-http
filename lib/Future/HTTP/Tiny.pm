@@ -42,6 +42,8 @@ sub BUILDARGS {
     }
 }
 
+sub is_async { !1 }
+
 sub _ae_from_http_tiny( $self, $result, $url ) {
     # Convert the result back to a future
     my( $body )        = delete $result->{content};
@@ -123,6 +125,10 @@ sub http_post($self,$url,$body,%options) {
     my $ua = Future::HTTP::Tiny->new();
 
 Creates a new instance of the HTTP client.
+
+=head2 C<< $ua->is_async() >>
+
+Returns false, because this backend is synchronous.
 
 =head2 C<< $ua->http_get($url, %options) >>
 
