@@ -41,6 +41,17 @@ sub check {
     };
 }
 
+my %skip = (
+    'Future::HTTP::AnyEvent' => 1,
+    'Future::HTTP::Mojo' => 1,
+    'Future::HTTP::NetAsync' => 1,
+    'Future::HTTP::Tiny::Paranoid' => 1,
+);
+
+if(( $ENV{USER} || '') eq 'corion' ) {
+    %skip = ();
+}
+
 my @files;
 find({wanted => \&wanted, no_chdir => 1},
     grep { -d $_ }
@@ -51,7 +62,7 @@ if( my $exe = $module{EXE_FILES}) {
     push @files, @$exe;
 };
 
-for (@files) {
+for (grep {!$skip{$_}} @files) {
     check($_)
 }
 
