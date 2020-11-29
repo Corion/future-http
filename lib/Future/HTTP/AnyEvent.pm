@@ -2,11 +2,7 @@ package Future::HTTP::AnyEvent;
 use strict;
 use Future;
 use AnyEvent::HTTP ();
-use AnyEvent::Future 'as_future_cb';
-BEGIN {
-    # Versions before that didn't have as_future_cb
-    AnyEvent::Future->VERSION(0.02)
-}
+use AnyEvent::Future;
 use Moo 2; # or Moo::Lax if you can't have Moo v2
 use Filter::signatures;
 no warnings 'experimental::signatures';
