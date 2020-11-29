@@ -34,17 +34,18 @@ sub future_from_result {
 }
 
 sub http_request($self,$method,$url,%options) {
-    my $res = AnyEvent::Future->new()->then(sub ($body, $headers) {
-        return $self->future_from_result($body, $headers);
+    my $res1 = AnyEvent::Future->new();
+    my $res = $res1->then(sub ($body, $headers) {
+        $self->future_from_result($body, $headers);
     });
 
     my $r;
     $r = AnyEvent::HTTP::http_request($method => $url, %options, sub ($body, $headers) {
         undef $r;
-        $res->done( $body,$headers )
+        $res1->done( $body,$headers );
     });
 
-    $res
+    return $res
 }
 
 sub http_get($self,$url,%options) {
