@@ -8,7 +8,7 @@ use Filter::signatures;
 no warnings 'experimental::signatures';
 use feature 'signatures';
 
-our $VERSION = '0.14';
+our $VERSION = '0.15';
 
 with 'Future::HTTP::Handler';
 
