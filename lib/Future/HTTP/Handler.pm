@@ -17,7 +17,7 @@ has 'on_http_response' => (
 );
 
 sub http_response_received( $self, $res, $body, $headers ) {
-    $self->on_http_response( $res, $body, $headers )
+    $self->on_http_response->( $res, $body, $headers )
         if $self->on_http_response;
     if( $headers->{Status} =~ /^[23]../ ) {
         $body = $self->decode_content( $body, $headers );
