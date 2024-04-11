@@ -5,7 +5,7 @@ use Moo 2; # or Moo::Lax if you can't have Moo v2
 use experimental 'signatures';
 
 use HTTP::Request;
-use IO::Async::Future;
+use IO::Async::Future 0.802; # for Future::XS support
 
 our $VERSION = '0.16';
 

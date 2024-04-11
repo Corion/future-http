@@ -1,6 +1,6 @@
 package Future::HTTP::Mojo;
 use strict;
-use Future::Mojo;
+use Future::Mojo 1.003; # only 1.003+ is compatible with Future::XS
 use Mojo::UserAgent;
 use Moo 2; # or Moo::Lax if you can't have Moo v2
 use experimental 'signatures';
