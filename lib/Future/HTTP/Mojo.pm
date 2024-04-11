@@ -3,9 +3,7 @@ use strict;
 use Future::Mojo;
 use Mojo::UserAgent;
 use Moo 2; # or Moo::Lax if you can't have Moo v2
-use Filter::signatures;
-no warnings 'experimental::signatures';
-use feature 'signatures';
+use experimental 'signatures';
 
 our $VERSION = '0.16';
 

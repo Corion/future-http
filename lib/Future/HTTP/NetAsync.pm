@@ -2,9 +2,7 @@ package Future::HTTP::NetAsync;
 use strict;
 use Net::Async::HTTP;
 use Moo 2; # or Moo::Lax if you can't have Moo v2
-use Filter::signatures;
-no warnings 'experimental::signatures';
-use feature 'signatures';
+use experimental 'signatures';
 
 use HTTP::Request;
 use IO::Async::Future;

@@ -1,9 +1,7 @@
 package # hide from indexer as it's not really ready
     Future::HTTP::API::HTTPTiny;
 use strict;
-use Filter::signatures;
-no warnings 'experimental::signatures';
-use feature 'signatures';
+use experimental 'signatures';
 require HTTP::Tiny;
 require URI;
 

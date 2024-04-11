@@ -4,9 +4,7 @@ use Future;
 use AnyEvent::HTTP ();
 use AnyEvent::Future;
 use Moo 2; # or Moo::Lax if you can't have Moo v2
-use Filter::signatures;
-no warnings 'experimental::signatures';
-use feature 'signatures';
+use experimental 'signatures';
 
 our $VERSION = '0.16';
 

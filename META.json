@@ -49,12 +49,12 @@
             "MIME::QuotedPrint" : "0"
          },
          "requires" : {
-            "Filter::signatures" : "0.13",
             "Future" : "0.31",
             "HTTP::Headers" : "6.07",
             "HTTP::Tiny" : "0",
             "Moo" : "2",
-            "perl" : "5.006"
+            "experimental" : "0.031",
+            "perl" : "5.020"
          }
       },
       "test" : {
