@@ -6,7 +6,7 @@ use AnyEvent::Future;
 use Moo 2; # or Moo::Lax if you can't have Moo v2
 use experimental 'signatures';
 
-our $VERSION = '0.16';
+our $VERSION = '0.17';
 
 with 'Future::HTTP::Handler';
 

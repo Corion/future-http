@@ -7,7 +7,7 @@ use experimental 'signatures';
 use HTTP::Request;
 use IO::Async::Future 0.802; # for Future::XS support
 
-our $VERSION = '0.16';
+our $VERSION = '0.17';
 
 with 'Future::HTTP::Handler';
 

@@ -2,7 +2,7 @@ package Future::HTTP::Handler;
 use Moo::Role;
 use experimental 'signatures';
 
-our $VERSION = '0.16';
+our $VERSION = '0.17';
 
 =head1 NAME
 

@@ -53,7 +53,7 @@ but has not materialized yet.
 
 =cut
 
-our $VERSION = '0.16';
+our $VERSION = '0.17';
 
 our @loops;
 push @loops, (
